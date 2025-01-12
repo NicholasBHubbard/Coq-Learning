@@ -30,6 +30,21 @@ Fixpoint count (A : Set) (t : binary_tree A) : nat :=
     | Node _ _ lchild rchild => 1 + count A lchild + count A rchild
   end.
 
-Eval compute in (count _ (Node _ 12 (Leaf _ 13) (Leaf _ 14))).
+Theorem count_length_traversal:
+  forall (A : Set) (t : binary_tree A), count A t = length (traverse_preorder A t).
+Proof.
+  intros.
+  induction t.
+  { simpl.
+    trivial.
+  }
+  {
+    simpl.
+    rewrite IHt1.
+    rewrite IHt2.
+    rewrite length_app.
+    trivial.
+  }
+Qed.
 
 End Binary_Tree.

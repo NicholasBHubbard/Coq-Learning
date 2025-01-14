@@ -9,7 +9,7 @@ Inductive binary_tree (A : Set) : Set :=
 Fixpoint traverse_preorder (A : Set) (t : binary_tree A) : list A :=
   match t with
     | Leaf _ val => cons val nil
-    | Node _ val lchild rchild => val :: (traverse_preorder A lchild) ++ (traverse_preorder A rchild)
+    | Node _ val lchild rchild => (val :: nil) ++ (traverse_preorder A lchild) ++ (traverse_preorder A rchild)
   end.
 
 Fixpoint traverse_inorder (A : Set) (t : binary_tree A) : list A :=
